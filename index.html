@@ -3,18 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Rotulador de Certificados | Club Atlas</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
     margin:0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
     background:#eef1f5;
     color:#1f2937;
 }
@@ -22,112 +18,112 @@ body{
 header{
     background:#111827;
     color:white;
-    padding:18px 28px;
+    padding:16px 25px;
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
-header h1{
-    margin:0;
-    font-size:22px;
-}
-
-header span{
-    font-size:13px;
-    color:#cbd5e1;
-}
+header h1{margin:0;font-size:22px}
+header small{color:#cbd5e1}
 
 .app{
     display:grid;
-    grid-template-columns:380px 1fr;
-    min-height:calc(100vh - 68px);
+    grid-template-columns:420px 1fr;
+    min-height:calc(100vh - 65px);
 }
 
 .panel{
     background:white;
-    padding:24px;
+    padding:20px;
     border-right:1px solid #d1d5db;
     overflow:auto;
 }
 
-.panel h2{
-    margin-top:0;
-    font-size:18px;
-}
+h2{font-size:18px;margin-top:0}
 
-.grupo{
-    margin-bottom:18px;
-}
+.grupo{margin-bottom:14px}
 
 label{
     display:block;
-    font-size:13px;
+    font-size:12px;
     font-weight:bold;
-    margin-bottom:6px;
+    margin-bottom:5px;
 }
 
-input,
-select{
+input,select{
     width:100%;
-    padding:10px;
+    padding:9px;
     border:1px solid #cbd5e1;
     border-radius:6px;
-    font-size:14px;
 }
 
-input:focus,
-select:focus{
+input:focus,select:focus{
     outline:none;
     border-color:#2563eb;
 }
 
-.fila{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-}
-
 .separador{
     border-top:1px solid #e5e7eb;
-    margin:22px 0;
+    margin:20px 0;
 }
 
-.calibracion{
+.posiciones{
     background:#f8fafc;
     border:1px solid #e2e8f0;
-    padding:15px;
     border-radius:8px;
+    padding:14px;
 }
 
-.calibracion h3{
-    margin-top:0;
+.posiciones h3{
+    margin:0 0 12px;
     font-size:15px;
+}
+
+.cabecera-pos,
+.fila-pos{
+    display:grid;
+    grid-template-columns:1.25fr 1fr 1fr;
+    gap:6px;
+    align-items:center;
+}
+
+.cabecera-pos{
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.fila-pos{
+    margin-bottom:7px;
+    font-size:12px;
+}
+
+.fila-pos input{
+    padding:7px;
+}
+
+.ayuda{
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    padding:10px;
+    border-radius:6px;
+    font-size:11px;
+    line-height:1.45;
+    margin-top:12px;
 }
 
 button{
     border:0;
-    padding:12px 15px;
-    border-radius:7px;
-    font-size:14px;
-    font-weight:bold;
+    border-radius:6px;
+    padding:11px;
     cursor:pointer;
-}
-
-.btn-imprimir{
-    width:100%;
-    background:#166534;
-    color:white;
-    margin-top:12px;
-}
-
-.btn-imprimir:hover{
-    background:#14532d;
+    font-weight:bold;
 }
 
 .btn-guardar{
     width:100%;
-    background:#1d4ed8;
+    background:#2563eb;
     color:white;
     margin-top:10px;
 }
@@ -135,92 +131,73 @@ button{
 .btn-reset{
     width:100%;
     background:#e5e7eb;
-    margin-top:8px;
+    margin-top:7px;
+}
+
+.btn-imprimir{
+    width:100%;
+    background:#15803d;
+    color:white;
+    margin-top:14px;
+    font-size:15px;
 }
 
 .preview-area{
-    padding:30px;
+    padding:25px;
     overflow:auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    text-align:center;
 }
 
 .preview-area h2{
     font-size:16px;
-    margin-top:0;
 }
 
 .nota{
-    font-size:12px;
+    font-size:11px;
     color:#64748b;
-    margin-bottom:15px;
+    margin-bottom:12px;
 }
 
-/*
- HOJA REAL:
- 215 mm x 350 mm
-*/
+.hoja-contenedor{
+    display:flex;
+    justify-content:center;
+}
+
 .hoja{
     position:relative;
     width:215mm;
     height:350mm;
     background:white;
-    box-shadow:0 5px 25px rgba(0,0,0,.18);
+    box-shadow:0 5px 25px rgba(0,0,0,.2);
+    transform:scale(.55);
     transform-origin:top center;
-    transform:scale(.58);
-    margin-bottom:-520px;
+    margin-bottom:-590px;
     overflow:hidden;
 }
 
-/*
- La imagen es únicamente una referencia visual.
- No se imprime.
-*/
 .certificado-fondo{
     position:absolute;
     inset:0;
     width:100%;
     height:100%;
     object-fit:fill;
-    opacity:.55;
+    opacity:.70;
     pointer-events:none;
 }
 
 .texto-certificado{
     position:absolute;
     white-space:nowrap;
-    font-family:"Times New Roman", serif;
+    font-family:"Times New Roman",serif;
     font-size:4mm;
     color:#000;
     z-index:10;
+    border:0.3mm dashed transparent;
 }
 
-/* posiciones iniciales aproximadas */
-
-#texto1{
-    left:24mm;
-    top:170mm;
-}
-
-#texto2{
-    left:24mm;
-    top:224mm;
-}
-
-#texto3{
-    left:24mm;
-    top:278mm;
-}
-
-#texto4{
-    left:24mm;
-    top:320mm;
-}
-
-#textoFecha{
-    left:145mm;
-    top:320mm;
+.modo-calibracion .texto-certificado{
+    border-color:#2563eb;
+    background:rgba(255,255,255,.40);
 }
 
 .regla{
@@ -230,28 +207,31 @@ button{
     z-index:5;
     display:none;
     background-image:
-        linear-gradient(to right, rgba(0,100,255,.12) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0,100,255,.12) 1px, transparent 1px);
+      linear-gradient(to right,rgba(0,100,255,.12) 1px,transparent 1px),
+      linear-gradient(to bottom,rgba(0,100,255,.12) 1px,transparent 1px);
     background-size:10mm 10mm;
 }
 
-.mostrar-regla .regla{
-    display:block;
+.mostrar-regla .regla{display:block}
+
+.opciones{
+    margin-top:12px;
+    font-size:12px;
+}
+
+.opciones label{
+    font-weight:normal;
+}
+
+.opciones input{
+    width:auto;
 }
 
 @media(max-width:1000px){
-
-    .app{
-        grid-template-columns:1fr;
-    }
-
-    .panel{
-        border-right:0;
-    }
-
+    .app{grid-template-columns:1fr}
 }
 
-/* IMPRESIÓN */
+/* IMPRESIÓN REAL */
 
 @page{
     size:215mm 350mm;
@@ -260,10 +240,9 @@ button{
 
 @media print{
 
-    html,
-    body{
-        margin:0 !important;
-        padding:0 !important;
+    html,body{
+        margin:0!important;
+        padding:0!important;
         width:215mm;
         height:350mm;
         background:white;
@@ -271,62 +250,53 @@ button{
 
     header,
     .panel,
-    .preview-area > h2,
+    .preview-area h2,
     .nota{
-        display:none !important;
+        display:none!important;
     }
 
-    .app{
-        display:block;
-    }
+    .app{display:block}
 
     .preview-area{
-        padding:0;
         margin:0;
+        padding:0;
+    }
+
+    .hoja-contenedor{
         display:block;
     }
 
     .hoja{
+        transform:none!important;
         width:215mm;
         height:350mm;
-        margin:0;
-        padding:0;
-        transform:none !important;
+        margin:0!important;
         box-shadow:none;
-        overflow:hidden;
     }
 
-    /*
-    MUY IMPORTANTE:
-    el certificado de fondo NO se imprime.
-    */
     .certificado-fondo,
     .regla{
-        display:none !important;
+        display:none!important;
     }
 
     .texto-certificado{
-        color:#000 !important;
+        border:none!important;
+        background:transparent!important;
+        color:#000!important;
     }
-
 }
-
 </style>
 </head>
 
 <body>
 
 <header>
+<div>
+<h1>Rotulador de Certificados</h1>
+<small>Club Atlas · Sistema de impresión</small>
+</div>
 
-    <div>
-        <h1>Rotulador de Certificados</h1>
-        <span>Club Atlas · Sistema de impresión</span>
-    </div>
-
-    <div>
-        Papel seguridad 215 × 350 mm
-    </div>
-
+<div>Papel seguridad 215 × 350 mm</div>
 </header>
 
 <div class="app">
@@ -336,165 +306,127 @@ button{
 <h2>Datos del certificado</h2>
 
 <div class="grupo">
-
 <label>Sección / operación</label>
-
 <select id="seccion">
-
-<option value="principal">
-Certificado principal
-</option>
-
-<option value="cesion1">
-Cesión 1
-</option>
-
-<option value="cesion2">
-Cesión 2
-</option>
-
-<option value="cesion3">
-Cesión 3
-</option>
-
+<option>Cesión 1</option>
+<option>Cesión 2</option>
+<option>Cesión 3</option>
 </select>
-
 </div>
 
 <div class="grupo">
-
 <label>Nombre 1</label>
-
-<input
-id="nombre1"
-type="text"
-placeholder="Escriba el primer nombre"
-oninput="actualizar()">
-
+<input id="nombre1" oninput="actualizar()" placeholder="Nombre 1">
 </div>
 
 <div class="grupo">
-
 <label>Nombre 2</label>
-
-<input
-id="nombre2"
-type="text"
-placeholder="Escriba el segundo nombre"
-oninput="actualizar()">
-
+<input id="nombre2" oninput="actualizar()" placeholder="Nombre 2">
 </div>
 
 <div class="grupo">
-
 <label>Nombre 3</label>
-
-<input
-id="nombre3"
-type="text"
-placeholder="Escriba el tercer nombre"
-oninput="actualizar()">
-
+<input id="nombre3" oninput="actualizar()" placeholder="Nombre 3">
 </div>
 
 <div class="grupo">
-
 <label>Nombre 4</label>
-
-<input
-id="nombre4"
-type="text"
-placeholder="Escriba el cuarto nombre"
-oninput="actualizar()">
-
+<input id="nombre4" oninput="actualizar()" placeholder="Nombre 4">
 </div>
 
 <div class="grupo">
-
 <label>Fecha</label>
-
-<input
-id="fecha"
-type="date"
-oninput="actualizar()">
-
+<input id="fecha" type="date" oninput="actualizar()">
 </div>
 
 <div class="separador"></div>
 
-<div class="calibracion">
+<div class="posiciones">
 
-<h3>Calibración de impresión</h3>
+<h3>Posición individual de cada campo (mm)</h3>
 
-<div class="grupo">
-
-<label>Desplazamiento horizontal X (mm)</label>
-
-<input
-id="offsetX"
-type="number"
-step="0.5"
-value="0"
-oninput="aplicarCalibracion()">
-
+<div class="cabecera-pos">
+<div>Campo</div>
+<div>X</div>
+<div>Y</div>
 </div>
 
-<div class="grupo">
-
-<label>Desplazamiento vertical Y (mm)</label>
-
-<input
-id="offsetY"
-type="number"
-step="0.5"
-value="0"
-oninput="aplicarCalibracion()">
-
+<div class="fila-pos">
+<div>Nombre 1</div>
+<input id="x1" type="number" step="0.5" value="112">
+<input id="y1" type="number" step="0.5" value="170">
 </div>
 
-<div class="grupo">
+<div class="fila-pos">
+<div>Nombre 2</div>
+<input id="x2" type="number" step="0.5" value="112">
+<input id="y2" type="number" step="0.5" value="215">
+</div>
 
+<div class="fila-pos">
+<div>Nombre 3</div>
+<input id="x3" type="number" step="0.5" value="112">
+<input id="y3" type="number" step="0.5" value="260">
+</div>
+
+<div class="fila-pos">
+<div>Nombre 4</div>
+<input id="x4" type="number" step="0.5" value="112">
+<input id="y4" type="number" step="0.5" value="305">
+</div>
+
+<div class="fila-pos">
+<div>Fecha</div>
+<input id="xf" type="number" step="0.5" value="145">
+<input id="yf" type="number" step="0.5" value="320">
+</div>
+
+<div class="grupo" style="margin-top:12px">
 <label>Tamaño de letra (mm)</label>
+<input id="tamano" type="number" step="0.2" value="4" oninput="aplicarPosiciones()">
+</div>
 
-<input
-id="tamano"
-type="number"
-step="0.2"
-value="4"
-oninput="aplicarCalibracion()">
+<button class="btn-guardar" onclick="aplicarYGuardar()">
+Aplicar y guardar posiciones
+</button>
+
+<button class="btn-reset" onclick="restablecer()">
+Restablecer posiciones
+</button>
+
+<div class="ayuda">
+<b>Cómo calibrar:</b><br>
+X mueve únicamente ese campo a izquierda/derecha.<br>
+Y mueve únicamente ese campo arriba/abajo.<br><br>
+
+↑ Menor Y = sube<br>
+↓ Mayor Y = baja<br>
+← Menor X = izquierda<br>
+→ Mayor X = derecha
+</div>
 
 </div>
 
-<div class="grupo">
+<div class="opciones">
 
 <label>
-<input
-type="checkbox"
+<input type="checkbox"
 id="verRegla"
-onchange="mostrarRegla()"
-style="width:auto">
-Mostrar cuadrícula de calibración
+onchange="mostrarRegla()">
+Mostrar cuadrícula
+</label>
+
+<label>
+<input type="checkbox"
+id="verBordes"
+checked
+onchange="mostrarBordes()">
+Mostrar bordes de los campos
 </label>
 
 </div>
 
-<button
-class="btn-guardar"
-onclick="guardarConfiguracion()">
-Guardar calibración
-</button>
-
-<button
-class="btn-reset"
-onclick="restablecer()">
-Restablecer
-</button>
-
-</div>
-
-<button
-class="btn-imprimir"
-onclick="imprimir()">
+<button class="btn-imprimir" onclick="imprimir()">
 🖨 Imprimir certificado
 </button>
 
@@ -506,53 +438,25 @@ onclick="imprimir()">
 <h2>Vista previa</h2>
 
 <div class="nota">
-El certificado de fondo es únicamente una referencia.
-No se imprimirá.
+La imagen del certificado es solamente una referencia y NO se imprime.
 </div>
 
-<div class="hoja" id="hoja">
+<div class="hoja-contenedor">
 
-<!--
-Después cargaremos aquí la imagen real
-del certificado dentro del repositorio.
--->
+<div class="hoja modo-calibracion" id="hoja">
 
 <img
-id="fondo"
-class="certificado-fondo"
 src="certificado.jpg"
-alt="Certificado">
+class="certificado-fondo">
 
 <div class="regla"></div>
 
-<div
-class="texto-certificado"
-id="texto1">
-Nombre 1
-</div>
+<div class="texto-certificado" id="texto1">Nombre 1</div>
+<div class="texto-certificado" id="texto2">Nombre 2</div>
+<div class="texto-certificado" id="texto3">Nombre 3</div>
+<div class="texto-certificado" id="texto4">Nombre 4</div>
+<div class="texto-certificado" id="textoFecha">Fecha</div>
 
-<div
-class="texto-certificado"
-id="texto2">
-Nombre 2
-</div>
-
-<div
-class="texto-certificado"
-id="texto3">
-Nombre 3
-</div>
-
-<div
-class="texto-certificado"
-id="texto4">
-Nombre 4
-</div>
-
-<div
-class="texto-certificado"
-id="textoFecha">
-Fecha
 </div>
 
 </div>
@@ -563,228 +467,185 @@ Fecha
 
 <script>
 
-const posicionesBase = {
-
-    texto1:{
-        x:24,
-        y:170
-    },
-
-    texto2:{
-        x:24,
-        y:224
-    },
-
-    texto3:{
-        x:24,
-        y:278
-    },
-
-    texto4:{
-        x:24,
-        y:320
-    },
-
-    textoFecha:{
-        x:145,
-        y:320
-    }
-
-};
-
+const campos = [
+    ["texto1","x1","y1"],
+    ["texto2","x2","y2"],
+    ["texto3","x3","y3"],
+    ["texto4","x4","y4"],
+    ["textoFecha","xf","yf"]
+];
 
 function actualizar(){
 
-    document.getElementById("texto1").textContent =
-    document.getElementById("nombre1").value || "Nombre 1";
+    texto1.textContent =
+        nombre1.value || "Nombre 1";
 
-    document.getElementById("texto2").textContent =
-    document.getElementById("nombre2").value || "Nombre 2";
+    texto2.textContent =
+        nombre2.value || "Nombre 2";
 
-    document.getElementById("texto3").textContent =
-    document.getElementById("nombre3").value || "Nombre 3";
+    texto3.textContent =
+        nombre3.value || "Nombre 3";
 
-    document.getElementById("texto4").textContent =
-    document.getElementById("nombre4").value || "Nombre 4";
+    texto4.textContent =
+        nombre4.value || "Nombre 4";
 
+    if(fecha.value){
 
-    const fecha =
-    document.getElementById("fecha").value;
+        const p = fecha.value.split("-");
 
-    if(fecha){
-
-        const partes =
-        fecha.split("-");
-
-        document.getElementById("textoFecha").textContent =
-        partes[2] + "/" +
-        partes[1] + "/" +
-        partes[0];
+        textoFecha.textContent =
+            p[2]+"/"+p[1]+"/"+p[0];
 
     }else{
-
-        document.getElementById("textoFecha").textContent =
-        "Fecha";
-
+        textoFecha.textContent="Fecha";
     }
-
 }
 
+function aplicarPosiciones(){
 
-function aplicarCalibracion(){
+    const tam =
+        parseFloat(tamano.value) || 4;
 
-    const x =
-    parseFloat(
-        document.getElementById("offsetX").value
-    ) || 0;
-
-    const y =
-    parseFloat(
-        document.getElementById("offsetY").value
-    ) || 0;
-
-    const tamano =
-    parseFloat(
-        document.getElementById("tamano").value
-    ) || 4;
-
-
-    Object.keys(posicionesBase).forEach(id => {
+    campos.forEach(c=>{
 
         const elemento =
-        document.getElementById(id);
+            document.getElementById(c[0]);
 
-        elemento.style.left =
-        (posicionesBase[id].x + x) + "mm";
+        const x =
+            parseFloat(
+                document.getElementById(c[1]).value
+            ) || 0;
 
-        elemento.style.top =
-        (posicionesBase[id].y + y) + "mm";
+        const y =
+            parseFloat(
+                document.getElementById(c[2]).value
+            ) || 0;
 
-        elemento.style.fontSize =
-        tamano + "mm";
+        elemento.style.left=x+"mm";
+        elemento.style.top=y+"mm";
+        elemento.style.fontSize=tam+"mm";
 
     });
-
 }
 
+function aplicarYGuardar(){
 
-function mostrarRegla(){
+    aplicarPosiciones();
 
-    const hoja =
-    document.getElementById("hoja");
+    const config={};
 
-    if(
-        document.getElementById("verRegla").checked
-    ){
-
-        hoja.classList.add(
-            "mostrar-regla"
-        );
-
-    }else{
-
-        hoja.classList.remove(
-            "mostrar-regla"
-        );
-
-    }
-
-}
-
-
-function guardarConfiguracion(){
-
-    const configuracion = {
-
-        x:
-        document.getElementById("offsetX").value,
-
-        y:
-        document.getElementById("offsetY").value,
-
-        tamano:
-        document.getElementById("tamano").value
-
-    };
+    [
+        "x1","y1",
+        "x2","y2",
+        "x3","y3",
+        "x4","y4",
+        "xf","yf",
+        "tamano"
+    ].forEach(id=>{
+        config[id]=
+            document.getElementById(id).value;
+    });
 
     localStorage.setItem(
-        "atlasCalibracion",
-        JSON.stringify(configuracion)
+        "atlasPosicionesV2",
+        JSON.stringify(config)
     );
 
-    alert(
-        "Calibración guardada correctamente."
-    );
-
+    alert("Posiciones guardadas correctamente.");
 }
 
+function cargar(){
 
-function cargarConfiguracion(){
+    const datos =
+        localStorage.getItem(
+            "atlasPosicionesV2"
+        );
 
-    const guardada =
-    localStorage.getItem(
-        "atlasCalibracion"
-    );
+    if(datos){
 
-    if(!guardada){
-        aplicarCalibracion();
-        return;
+        const config =
+            JSON.parse(datos);
+
+        Object.keys(config).forEach(id=>{
+
+            const elemento =
+                document.getElementById(id);
+
+            if(elemento)
+                elemento.value=config[id];
+
+        });
     }
 
-    const config =
-    JSON.parse(guardada);
-
-    document.getElementById(
-        "offsetX"
-    ).value = config.x || 0;
-
-    document.getElementById(
-        "offsetY"
-    ).value = config.y || 0;
-
-    document.getElementById(
-        "tamano"
-    ).value = config.tamano || 4;
-
-    aplicarCalibracion();
-
+    aplicarPosiciones();
+    actualizar();
 }
-
 
 function restablecer(){
 
-    document.getElementById(
-        "offsetX"
-    ).value = 0;
+    const originales={
+        x1:112,y1:170,
+        x2:112,y2:215,
+        x3:112,y3:260,
+        x4:112,y4:305,
+        xf:145,yf:320,
+        tamano:4
+    };
 
-    document.getElementById(
-        "offsetY"
-    ).value = 0;
+    Object.keys(originales).forEach(id=>{
+        document.getElementById(id).value=
+            originales[id];
+    });
 
-    document.getElementById(
-        "tamano"
-    ).value = 4;
-
-    aplicarCalibracion();
-
+    aplicarPosiciones();
 }
 
+function mostrarRegla(){
+
+    hoja.classList.toggle(
+        "mostrar-regla",
+        verRegla.checked
+    );
+}
+
+function mostrarBordes(){
+
+    hoja.classList.toggle(
+        "modo-calibracion",
+        verBordes.checked
+    );
+}
 
 function imprimir(){
 
-    aplicarCalibracion();
+    aplicarPosiciones();
 
     window.print();
-
 }
 
+/*
+ Actualización instantánea:
+ cada X/Y mueve solamente su campo.
+*/
 
-window.onload = function(){
+[
+"x1","y1",
+"x2","y2",
+"x3","y3",
+"x4","y4",
+"xf","yf"
+].forEach(id=>{
 
-    cargarConfiguracion();
-    actualizar();
+    document
+    .getElementById(id)
+    .addEventListener(
+        "input",
+        aplicarPosiciones
+    );
 
-};
+});
+
+window.onload=cargar;
 
 </script>
 
