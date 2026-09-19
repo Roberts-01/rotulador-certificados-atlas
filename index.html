@@ -554,7 +554,7 @@ if(fecha.value){
     const lector = new FileReader();
 
     lector.onload = function(e){
-        const imagen = document.querySelector(".certificado img");
+       const imagen = document.querySelector(".certificado-fondo");
 
         if(imagen){
             imagen.src = e.target.result;
