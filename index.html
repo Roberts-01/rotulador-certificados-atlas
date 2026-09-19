@@ -489,16 +489,33 @@ function actualizar(){
     texto4.textContent =
         nombre4.value || "Nombre 4";
 
-    if(fecha.value){
+if(fecha.value){
 
-        const p = fecha.value.split("-");
+    const [anio, mes, dia] = fecha.value.split("-");
 
-        textoFecha.textContent =
-            p[2]+"/"+p[1]+"/"+p[0];
+    const meses = [
+        "enero",
+        "febrero",
+        "marzo",
+        "abril",
+        "mayo",
+        "junio",
+        "julio",
+        "agosto",
+        "septiembre",
+        "octubre",
+        "noviembre",
+        "diciembre"
+    ];
 
-    }else{
-        textoFecha.textContent="Fecha";
-    }
+    textoFecha.textContent =
+        parseInt(dia) + " de " +
+        meses[parseInt(mes) - 1] +
+        " de " + anio;
+
+}else{
+    textoFecha.textContent = "Fecha";
+}
 }
 
 function aplicarPosiciones(){
