@@ -274,16 +274,13 @@ button{
         box-shadow:none;
     }
 
-    .certificado-fondo,
-    .regla{
-        display:none!important;
-    }
+  .certificado-fondo,
+.regla{
+    display:none!important;
+}
 
-    .texto-certificado{
-        border:none!important;
-        background:transparent!important;
-        color:#000!important;
-    }
+body.imprimir-con-fondo .certificado-fondo{
+    display:block!important;
 }
 </style>
 </head>
@@ -464,6 +461,11 @@ Mostrar bordes de los campos
 
 <div class="nota">
 La imagen del certificado es solamente una referencia y NO se imprime.
+
+    <label style="display:flex; align-items:center; gap:8px; margin-top:10px;">
+    <input type="checkbox" id="imprimirFondo" style="width:auto;">
+    Imprimir también el fondo (solo para prueba)
+</label>
 </div>
 
 <div class="hoja-contenedor">
@@ -698,7 +700,18 @@ function imprimir(){
 
     aplicarPosiciones();
 
+    const imprimirFondo =
+        document.getElementById("imprimirFondo");
+
+    if(imprimirFondo && imprimirFondo.checked){
+        document.body.classList.add("imprimir-con-fondo");
+    }else{
+        document.body.classList.remove("imprimir-con-fondo");
+    }
+
     window.print();
+
+    document.body.classList.remove("imprimir-con-fondo");
 }
 
 /*
