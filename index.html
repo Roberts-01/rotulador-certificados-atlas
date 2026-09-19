@@ -338,6 +338,31 @@ button{
 <label>Fecha</label>
 <input id="fecha" type="date" oninput="actualizar()">
 </div>
+    <div class="grupo">
+    <label>Imagen del certificado</label>
+
+    <div style="display:flex; gap:8px;">
+        <button type="button" onclick="document.getElementById('cargarImagen').click()">
+            Cargar imagen / escaneo
+        </button>
+
+        <button type="button" onclick="quitarImagen()">
+            Quitar imagen
+        </button>
+    </div>
+
+    <input
+        type="file"
+        id="cargarImagen"
+        accept="image/png,image/jpeg"
+        style="display:none"
+        onchange="cargarImagenCertificado(event)"
+    >
+
+    <div class="ayuda">
+        La imagen se utiliza únicamente como referencia y no se imprime.
+    </div>
+</div>
 
 <div class="separador"></div>
 
@@ -518,7 +543,43 @@ if(fecha.value){
 }
 }
 
+    function cargarImagenCertificado(event){
+
+    const archivo = event.target.files[0];
+
+    if(!archivo) return;
+
+    const lector = new FileReader();
+
+    lector.onload = function(e){
+        const imagen = document.querySelector(".certificado img");
+
+        if(imagen){
+            imagen.src = e.target.result;
+        }
+    };
+
+    lector.readAsDataURL(archivo);
+}
+
+
+function quitarImagen(){
+
+    const imagen = document.querySelector(".certificado-fondo")
+
+    if(imagen){
+        imagen.src = "certificado.jpg";
+    }
+
+    const selector = document.getElementById("cargarImagen");
+
+    if(selector){
+        selector.value = "";
+    }
+}
+
 function aplicarPosiciones(){
+
 
     const tam =
         parseFloat(tamano.value) || 4;
